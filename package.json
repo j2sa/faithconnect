@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/j2sa/faithconnect/issues"
   },
-  "homepage": "https://github.com/j2sa/faithconnect#readme"
+  "homepage": "https://github.com/j2sa/faithconnect#readme",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.7.2"
+  }
 }
