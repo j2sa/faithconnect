@@ -6,7 +6,7 @@ const membrosRouter = require('./routes/membros');
 const usersRouter = require('./routes/users'); 
 const auth = require('./middleware/auth'); // Middleware de autenticação
 
-dotenv.config();
+dotenv.config({ path: '../.env' });
 
 const app = express();
 const PORT = process.env.PORT || 5000;
