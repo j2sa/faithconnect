@@ -36,19 +36,16 @@ Líderes e responsáveis de igrejas.
 1. Acessar API: http://localhost:3000/
 
 ## Estrutura de arquivos e pastas
--- root/
---- config/
----- config.js
----- database.js
--- .env
--- models/
----- membro.js
--- controllers/
----- membroController.js
--- routes/
----- membroRoute.js
--- package-lock.json
--- package.json
--- server.js
--- .gitignore
--- README.md
+/faithconnect
+    ├── /backend
+    │   ├── /middleware
+    │   │   └── auth.js
+    │   ├── /models
+    │   │   └── Church.js
+    │   │   └── Membro.js
+    │   │   └── User.js
+    │   ├── /routes
+    │   │   └── membros.js
+    │   │   └── users.js
+    │   └── server.js
+    ├── /frontend
