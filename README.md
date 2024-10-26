@@ -9,13 +9,13 @@ Fornecer uma ferramenta eficaz para gerenciar cadastros de membros, visualizar r
 ## Funcionalidades
 - Cadastro de membros da igreja
 - Relatórios, painéis e gráficos de dados
-- Alertas de aniversários e eventos importantes
-- Visualização de famílias e relacionamentos entre membros
+- Alertas de aniversários e eventos importantes - AINDA NÃO IMPLEMENTADO
+- Visualização de famílias e relacionamentos entre membros - AINDA NÃO IMPLEMENTADO
 - Gerenciamento de cadastros
-- Filtros e buscas avançadas
-- Geração de relatórios personalizados
-- Integração com calendário
-- Envio de notificações e lembretes
+- Filtros e buscas avançadas - AINDA NÃO IMPLEMENTADO
+- Geração de relatórios personalizados - AINDA NÃO IMPLEMENTADO
+- Integração com calendário - AINDA NÃO IMPLEMENTADO
+- Envio de notificações e lembretes - AINDA NÃO IMPLEMENTADO
 
 ## Público-alvo
 Líderes e responsáveis de igrejas.
@@ -27,13 +27,12 @@ Líderes e responsáveis de igrejas.
 - Mongoose
 
 ## Instalação
-1. Clonar repositório: git clone (link unavailable)
-2. Instalar dependências: npm install
-3. Configurar variáveis de ambiente: criar arquivo .env com configurações
-4. Iniciar servidor: node server.js
+1. Clonar repositório: git clone https://github.com/j2sa/faithconnect/
+2. Instalar dependências do backend: npm install express mongoose dotenv body-parser bcrypt jsonwebtoken cors
+3. Configurar variáveis de ambiente: criar arquivo .env na pasta root
 
 ## Uso
-1. Acessar API: http://localhost:3000/
+1. Acessar API: http://localhost:5000/
 
 ## Estrutura de arquivos e pastas
 /faithconnect
