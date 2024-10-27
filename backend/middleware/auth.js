@@ -11,7 +11,7 @@ const auth = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (error) {
-    res.status(400).send('Token inválido.');
+    res.status(400).send('Token inválido ou expirado.');
   }
 };
 
