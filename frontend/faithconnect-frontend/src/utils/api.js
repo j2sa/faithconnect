@@ -1,4 +1,5 @@
 import axios from 'axios';
+import auth from './auth'; // Certifique-se de importar auth
 
 const api = axios.create({
   baseURL: 'http://localhost:5000/api', // Ajuste a URL base conforme necessário

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import api from '../src/utils/api';
-import auth from '../src/utils/auth';
+import auth from '../src/utils/auth'; // Certifique-se de que isso está aqui
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -16,7 +16,7 @@ const Login = () => {
       auth.setToken(response.data.token);
       setError('');
       console.log('Login successful');
-      router.push('/dashboard'); // Redirecionar para a página principal ou dashboard
+      router.push('/dashboard');
     } catch (error) {
       setError('Login failed. Please try again.');
       console.error('Login failed:', error.message);
