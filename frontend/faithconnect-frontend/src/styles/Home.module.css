@@ -1,0 +1,33 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .home h1 {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .home p {
+    font-size: 1.25rem;
+    color: #666;
+  }
+  
+  .home a {
+    margin: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #0070f3;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .home a:hover {
+    background-color: #005bb5;
+  }
+  
