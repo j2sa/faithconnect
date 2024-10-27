@@ -16,7 +16,7 @@ const Login = () => {
       auth.setToken(response.data.token);
       setError('');
       console.log('Login successful');
-      router.push('/dashboard');
+      router.push('/home');
     } catch (error) {
       setError('Login failed. Please try again.');
       console.error('Login failed:', error.message);

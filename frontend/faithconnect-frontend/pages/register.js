@@ -25,7 +25,7 @@ const Register = () => {
       setSuccess('Registration successful!');
       setError('');
       console.log('Registration successful:', response.data);
-      // Redirecionar para a página de login ou dashboard se necessário
+      // Redirecionar para a página de login ou home se necessário
     } catch (error) {
       setError('Registration failed. Please try again.');
       setSuccess('');

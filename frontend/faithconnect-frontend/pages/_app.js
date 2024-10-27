@@ -8,27 +8,26 @@ import '../src/styles/globals.css';
 const MyApp = ({ Component, pageProps }) => {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  
   useEffect(() => {
     const token = auth.getToken();
     setIsAuthenticated(!!token);
   }, [router]);
-
+  
   const publicRoutes = ['/', '/login', '/register'];
-  const privateRoutes = ['/dashboard', '/profile', '/settings'];
-
+  
   // Determine the appropriate layout
   const getLayout = (page) => {
     if (publicRoutes.includes(router.pathname)) {
       return <Layout>{page}</Layout>;
     }
-    if (privateRoutes.includes(router.pathname) && isAuthenticated) {
+    if (!publicRoutes.includes(router.pathname) && isAuthenticated) {
       return <LayoutAuth>{page}</LayoutAuth>;
     }
     // Default to Layout if not authenticated or path not found
     return <Layout>{page}</Layout>;
   };
-
+  
   return getLayout(<Component {...pageProps} />);
 };
 

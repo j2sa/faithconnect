@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import auth from '../src/utils/auth';
 import LayoutAuth from '../components/LayoutAuth';
 
-const Dashboard = () => {
+const Home = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
 
@@ -28,8 +28,8 @@ const Dashboard = () => {
   );
 };
 
-Dashboard.getLayout = function getLayout(page) {
+Home.getLayout = function getLayout(page) {
   return <LayoutAuth>{page}</LayoutAuth>;
 };
 
-export default Dashboard;
+export default Home;
