@@ -65,3 +65,24 @@ body {
 .justify-center {
   justify-content: center;
 }
+
+.login-container {
+  display: flex;
+  height: 100vh;
+}
+
+.login-leftColumn {
+  flex: 1;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-rightColumn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f2f2f2;
+}

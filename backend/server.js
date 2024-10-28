@@ -27,7 +27,7 @@ app.use('/api', (req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('FaithConnect API');
+  res.send('ChurchHub API');
 });
 
 app.use('/api/membros', membrosRouter);

@@ -65,9 +65,9 @@ const LandingPage = () => {
   return (
     <div className="container mx-auto py-20 flex">
       <div className="w-full md:w-7/12 p-8">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">Bem vindo ao Faith Connect</h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">Bem vindo ao ChurchHub</h1>
         <p className="text-lg text-gray-600 mb-8">
-          A plataforma para gerenciar membros da igreja, visualizar relatórios e muito mais. Com o Faith Connect, você pode facilmente administrar suas atividades e fortalecer a comunidade da igreja.
+          A plataforma para gerenciar membros da igreja, visualizar relatórios e muito mais. Com o ChurchHub, você pode facilmente administrar suas atividades e fortalecer a comunidade da igreja.
         </p>
       </div>
       
@@ -79,7 +79,7 @@ const LandingPage = () => {
 
           {step === 1 && (
             <div className="step">
-              <input type="text" name="nome" placeholder="Nome" value={userData.nome} onChange={handleChange} required className="input" />
+              <input type="text" name="nome" placeholder="Nome" value={userData.nome} onChange={handleChange} required className="input" autoComplete="name" />
               <input type="email" name="email" placeholder="Email" value={userData.email} onChange={handleChange} required className="input" />
               <input type="text" name="cargo" placeholder="Cargo na Igreja" value={userData.cargo} onChange={handleChange} required className="input" />
               <div className="flex justify-end">

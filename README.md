@@ -1,7 +1,7 @@
-# FaithConnect
+# ChurchHub
 
 ## Descrição
-FaithConnect é uma plataforma de gestão e informação para líderes e responsáveis de igrejas.
+ChurchHub é uma plataforma de gestão e informação para líderes e responsáveis de igrejas.
 
 ## Objetivo
 Fornecer uma ferramenta eficaz para gerenciar cadastros de membros, visualizar relatórios e painéis, e facilitar a conexão entre líderes e membros.

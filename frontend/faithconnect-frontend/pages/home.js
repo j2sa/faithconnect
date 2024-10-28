@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
     <>
-      <h1 className="text-3xl font-bold mb-6">Bem-vindo ao FaithConnect!</h1>
+      <h1 className="text-3xl font-bold mb-6">Bem-vindo ao ChurchHub!</h1>
       <p className="text-lg">Estamos felizes em tê-lo de volta. Explore as funcionalidades da plataforma usando o menu de navegação.</p>
     </>
   );
