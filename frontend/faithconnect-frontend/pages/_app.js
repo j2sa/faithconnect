@@ -15,8 +15,7 @@ const MyApp = ({ Component, pageProps }) => {
   }, [router]);
   
   const publicRoutes = ['/', '/login', '/register'];
-  
-  // Determine the appropriate layout
+
   const getLayout = (page) => {
     if (publicRoutes.includes(router.pathname)) {
       return <Layout>{page}</Layout>;
@@ -24,10 +23,9 @@ const MyApp = ({ Component, pageProps }) => {
     if (!publicRoutes.includes(router.pathname) && isAuthenticated) {
       return <LayoutAuth>{page}</LayoutAuth>;
     }
-    // Default to Layout if not authenticated or path not found
     return <Layout>{page}</Layout>;
   };
-  
+
   return getLayout(<Component {...pageProps} />);
 };
 

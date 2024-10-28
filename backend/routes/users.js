@@ -8,7 +8,7 @@ const Church = require('../models/Church');
 // Rota para registrar um novo usuário e uma nova igreja
 router.post('/register', async (req, res) => {
   try {
-    const { nome, email, senha, igreja } = req.body;
+    const { nome, email, cargo, senha, igreja } = req.body;
     const existingChurch = await Church.findOne({ nome: igreja.nome, endereco: igreja.endereco });
     if (existingChurch) {
       return res.status(400).send('Já existe uma igreja com este nome e endereço.');
@@ -19,6 +19,7 @@ router.post('/register', async (req, res) => {
     const newUser = new User({
       nome,
       email,
+      cargo,
       senha: hashedPassword,
       igrejaId: newChurch._id
     });
