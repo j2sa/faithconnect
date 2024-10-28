@@ -2,3 +2,4 @@
 backend/node_modules/
 exportProject.ps1
 estrutura.txt
+.vscode/
