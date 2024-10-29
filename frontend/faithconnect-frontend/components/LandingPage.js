@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import api from '../src/utils/api';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import churchHubLogo from '../public/images/logo.png';
 
 const LandingPage = () => {
   const [step, setStep] = useState(1);
@@ -63,14 +65,16 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="container mx-auto py-20 flex">
+    <div className="container mx-auto py-40 flex">
       <div className="w-full md:w-7/12 p-8">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">Bem vindo ao ChurchHub</h1>
+        <div className="flex items-center mb-4 ">
+          <h1 className="text-4xl font-bold text-gray-800 mb-4 mt-3">Bem vindo ao </h1>
+          <Image src={churchHubLogo} height={80}/>
+        </div>
         <p className="text-lg text-gray-600 mb-8">
           A plataforma para gerenciar membros da igreja, visualizar relatórios e muito mais. Com o ChurchHub, você pode facilmente administrar suas atividades e fortalecer a comunidade da igreja.
         </p>
-      </div>
-      
+      </div>      
       <div className="w-full md:w-5/12 p-8 bg-white rounded-lg shadow-md" style={{ height: '320px' }}>
         <p className="text-center mb-4">Inscreva-se para começar sua avaliação gratuita.</p>
         <form onSubmit={handleSubmit}>

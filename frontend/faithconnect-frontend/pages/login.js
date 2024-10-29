@@ -61,7 +61,12 @@ const Login = () => {
         </div>
       </div>
       <div className="login-rightColumn">
-        {/* <Image src="/path-to-your-image.jpg" alt="Imagem ou Propaganda" width={500} height={500} />*/}
+        <Image 
+          src="https://i.giphy.com/YOZ2qMCwb9qec0Pkpj.webp" 
+          alt="Imagem ou Propaganda" 
+          width={500} height={500} 
+          unoptimized 
+        />
       </div>
     </div>
   );

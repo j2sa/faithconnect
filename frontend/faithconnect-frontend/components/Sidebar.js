@@ -1,8 +1,10 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import churchHubLogo from '../public/images/logo.png';
 
 const Sidebar = () => (
-  <div className="bg-gray-800 text-white w-64 h-screen px-4 py-8">
-    <h2 className="text-2xl font-bold mb-8">ChurchHub</h2>
+  <div className="sidebar text-white w-64 h-screen px-4 py-8">
+    <Image className="mb-8" src={churchHubLogo} layout="fixed" height={45}/>
     <ul className="space-y-4">
       <li>
         <Link href="/home" className="text-gray-300 hover:text-white">Home</Link>

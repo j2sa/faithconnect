@@ -8,6 +8,15 @@ body {
   /*margin-top: 60px;  Compensando a altura do Navbar fixo */
 }
 
+main { 
+  max-width: 1200px; /* Adicionando largura máxima */ 
+  margin: 0 auto; /* Centralizando o conteúdo */ 
+}
+
+.navbar {
+  background-color: #ffffff;
+}
+
 .input {
   display: block;
   margin: 10px auto;
@@ -30,7 +39,7 @@ body {
 }
 
 .button.bg-blue-600 {
-  background-color: #007bff;
+  background-color: #0a5694;
 }
 
 .button.bg-gray-600 {
@@ -42,7 +51,7 @@ body {
 }
 
 .button.bg-blue-600:hover {
-  background-color: #005bb5;
+  background-color: #067bf0;
 }
 
 .button.bg-gray-600:hover {
@@ -84,5 +93,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
+}
+
+.sidebar {
+  background-color: #0a5694;
 }
