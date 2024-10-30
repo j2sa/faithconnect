@@ -9,12 +9,23 @@ body {
 }
 
 main { 
-  max-width: 1200px; /* Adicionando largura máxima */ 
-  margin: 0 auto; /* Centralizando o conteúdo */ 
+  max-width: 1050px; /* Adicionando largura máxima */ 
+  margin: 0 auto; /* Centralizando o conteúdo */
+  flex: 1 0 auto; /* Permite que o main ocupe o espaço disponível */
 }
 
 .navbar {
   background-color: #ffffff;
+}
+
+.navbarContainer {
+  max-width: 1100px; /* Adicionando largura máxima para o Navbar */ 
+  margin: 0 auto; /* Centralizando o conteúdo */ 
+  padding: 0 1rem; /* Adicionando padding para evitar que o conteúdo grude nas bordas */
+}
+
+.footer { 
+  flex-shrink: 0; /* Garante que o footer não diminua */ 
 }
 
 .input {

@@ -7,10 +7,10 @@ const Sidebar = () => (
     <Image className="mb-8" src={churchHubLogo} layout="fixed" height={45}/>
     <ul className="space-y-4">
       <li>
-        <Link href="/home" className="text-gray-300 hover:text-white">Home</Link>
+        <Link href="/home" className="text-gray-300 hover:text-white">Início</Link>
       </li>
       <li>
-        <Link href="/profile" className="text-gray-300 hover:text-white">Profile</Link>
+        <Link href="/members" className="text-gray-300 hover:text-white">Membros</Link>
       </li>
       <li>
         <Link href="/settings" className="text-gray-300 hover:text-white">Settings</Link>

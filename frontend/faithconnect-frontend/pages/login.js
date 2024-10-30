@@ -52,6 +52,7 @@ const Login = () => {
               placeholder="Senha"
               required
               className="input"
+              autoComplete="current-password"
             />
             <div className="flex justify-between">
               <p> </p>

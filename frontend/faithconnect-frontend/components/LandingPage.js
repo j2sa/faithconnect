@@ -67,7 +67,7 @@ const LandingPage = () => {
   return (
     <div className="container mx-auto py-40 flex">
       <div className="w-full md:w-7/12 p-8">
-        <div className="flex items-center mb-4 ">
+        <div className="flex items-center mb-4">
           <h1 className="text-4xl font-bold text-gray-800 mb-4 mt-3">Bem vindo ao </h1>
           <Image src={churchHubLogo} height={80}/>
         </div>
