@@ -6,7 +6,7 @@ const Navbar = () => (
   <nav className="navbar border-b border-gray-200 px-4 py-2 fixed w-full top-0 z-10">
     <div className="navbarContainer flex justify-between items-center">
       <Link href="/" className="text-2xl font-bold text-gray-700">
-        <Image src={churchHubLogo} layout="fixed" height={45}/>
+        <Image src={churchHubLogo} alt="Church Hub" layout="fixed" height={45}/>
       </Link>
       <ul className="flex space-x-2">
         <li>

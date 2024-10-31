@@ -42,11 +42,30 @@ router.post('/login', async (req, res) => {
     if (!isPasswordValid) {
       return res.status(400).send('Senha incorreta');
     }
-    const token = jwt.sign({ userId: user._id, igrejaId: user.igrejaId._id }, process.env.JWT_SECRET, { expiresIn: '1h' }); // Token expira em 1 hora
-    res.status(200).send({ token });
+    const accessToken = jwt.sign({ userId: user._id, igrejaId: user.igrejaId._id }, process.env.JWT_SECRET, { expiresIn: '15m' });
+    const refreshToken = jwt.sign({ userId: user._id }, process.env.JWT_REFRESH_SECRET, { expiresIn: '7d' });
+
+    // Definindo os tokens como cookies
+    res.cookie('accessToken', accessToken, { httpOnly: true, secure: true });
+    res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: true });
+    res.status(200).send('Login bem-sucedido!');
   } catch (error) {
     res.status(400).send(error.message);
   }
+});
+
+// Rota para renovar o token
+router.post('/token', (req, res) => {
+  const { refreshToken } = req.cookies;
+  if (!refreshToken) return res.sendStatus(401);
+
+  jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+
+    const accessToken = jwt.sign({ userId: user.userId, igrejaId: user.igrejaId }, process.env.JWT_SECRET, { expiresIn: '15m' });
+    res.cookie('accessToken', accessToken, { httpOnly: true, secure: true, maxAge: 15 * 60 * 1000 });
+    res.json({ accessToken });
+  });
 });
 
 module.exports = router;

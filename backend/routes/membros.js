@@ -9,7 +9,9 @@ router.post('/', auth, async (req, res) => {  // Adicionar auth para proteger a 
     const newMembro = new Membro({
       ...req.body,
       userId: req.user.userId, // Associar o userId ao membro
-      igrejaId: req.user.igrejaId // Associar o igrejaId ao membro
+      igrejaId: req.user.igrejaId, // Associar o igrejaId ao membro
+      conjuge: req.user.conjuge, // Associar o conjuge ao membro
+      filhos: req.user.filhos // Associar os filhos ao membro
     });
     await newMembro.save();
     res.status(201).send(newMembro);

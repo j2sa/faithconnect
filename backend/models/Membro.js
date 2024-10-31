@@ -16,16 +16,24 @@ const MembroSchema = new mongoose.Schema({
     enum: ['falecimento', 'outra_igreja', 'outro'], 
     required: function() { return this.status === 'inativo'; } 
   },
-  userId: { // Campo para referenciar o usuário
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+  userId: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User', 
+    required: true 
   },
-  igrejaId: { // Adicione esta linha
+  igrejaId: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Church', 
+    required: true 
+  },
+  conjuge: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Church',
-    required: true
-  }
+    ref: 'Membro'
+  },
+  filhos: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Membro'
+  }]
 });
 
 MembroSchema.methods.getAniversario = function() {

@@ -4,6 +4,7 @@ import api from '../src/utils/api';
 import auth from '../src/utils/auth';
 import Image from 'next/image';
 import '../src/styles/globals.css';
+import Cookies from 'js-cookie';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -15,10 +16,14 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await api.post('/login', { email, senha });
-      auth.setToken(response.data.token);
+      Cookies.set('accessToken', response.data.accessToken, { expires: 1 }); // Expira em 1 dia
+      Cookies.set('refreshToken', response.data.refreshToken, { expires: 7 }); // Expira em 7 dias
+      auth.setToken(response.data.accessToken);
+      auth.setRefreshToken(response.data.refreshToken);
       setError('');
       console.log('Login successful');
-      router.push('/home');
+      console.log('Redirecionando para /home'); // Adicionando console log para verificar redirecionamento
+      router.push('/home'); // Redirecionar para home após login bem-sucedido
     } catch (error) {
       setError('Login failed. Please try again.');
       console.error('Login failed:', error.message);
@@ -26,13 +31,12 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container"> {/* Usando className diretamente */}
+    <div className="login-container">
       <div className="login-leftColumn">
-      <div className="p-8 bg-white rounded-lg shadow-md" style={{ height: '320px' }}>
-        <p className="mb-4">Preencha com seus dados de acesso.</p>
+        <div className="p-8 bg-white rounded-lg shadow-md" style={{ height: '320px' }}>
+          <p className="mb-4">Preencha com seus dados de acesso.</p>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <form onSubmit={handleSubmit}>
-            {/*  <label htmlFor="email">Email</label> */}
             <input
               type="email"
               id="email"
@@ -43,7 +47,6 @@ const Login = () => {
               className="input"
               autoComplete="email"
             />
-            {/* <label htmlFor="password">Senha</label> */}
             <input
               type="password"
               id="password"
@@ -62,11 +65,11 @@ const Login = () => {
         </div>
       </div>
       <div className="login-rightColumn">
-        <Image 
-          src="https://i.giphy.com/YOZ2qMCwb9qec0Pkpj.webp" 
-          alt="Imagem ou Propaganda" 
-          width={500} height={500} 
-          unoptimized 
+        <Image
+          src="https://i.giphy.com/YOZ2qMCwb9qec0Pkpj.webp"
+          alt="Imagem ou Propaganda"
+          width={500} height={500}
+          unoptimized
         />
       </div>
     </div>

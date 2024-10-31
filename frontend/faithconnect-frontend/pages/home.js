@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import auth from '../src/utils/auth';
 import LayoutAuth from '../components/LayoutAuth';
+import { jwtDecode } from 'jwt-decode';
 
 const Home = () => {
   const router = useRouter();
@@ -9,10 +10,24 @@ const Home = () => {
 
   useEffect(() => {
     const token = auth.getToken();
+    console.log(token)
     if (!token) {
       router.push('/login');
     } else {
-      setLoading(false);
+      try {
+        // Verificar a validade do token
+        const decodedToken = jwtDecode(token);
+        const now = Date.now() / 1000;
+        if (decodedToken.exp < now) {
+          // Token expirou
+          router.push('/login');
+        } else {
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error('Token inválido:', error);
+        router.push('/login');
+      }
     }
   }, [router]);
 

@@ -69,7 +69,7 @@ const LandingPage = () => {
       <div className="w-full md:w-7/12 p-8">
         <div className="flex items-center mb-4">
           <h1 className="text-4xl font-bold text-gray-800 mb-4 mt-3">Bem vindo ao </h1>
-          <Image src={churchHubLogo} height={80}/>
+          <Image src={churchHubLogo} alt="Church Hub" height={80}/>
         </div>
         <p className="text-lg text-gray-600 mb-8">
           A plataforma para gerenciar membros da igreja, visualizar relatórios e muito mais. Com o ChurchHub, você pode facilmente administrar suas atividades e fortalecer a comunidade da igreja.
