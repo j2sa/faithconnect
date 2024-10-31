@@ -10,7 +10,7 @@ const Home = () => {
 
   useEffect(() => {
     const token = auth.getToken();
-    console.log(token)
+    
     if (!token) {
       router.push('/login');
     } else {
