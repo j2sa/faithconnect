@@ -16,6 +16,8 @@ const Login = () => {
     try {
       const response = await api.post('/login', { email, senha });
 
+      console.log('Response data:', response.data); // Adicionando console log para verificar a resposta da API
+
       // Armazenar o token no sessionStorage
       sessionStorage.setItem('accessToken', response.data.accessToken);
       sessionStorage.setItem('refreshToken', response.data.refreshToken);

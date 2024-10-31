@@ -44,11 +44,17 @@ router.post('/login', async (req, res) => {
     }
     const accessToken = jwt.sign({ userId: user._id, igrejaId: user.igrejaId._id }, process.env.JWT_SECRET, { expiresIn: '15m' });
     const refreshToken = jwt.sign({ userId: user._id }, process.env.JWT_REFRESH_SECRET, { expiresIn: '7d' });
-
+    
     // Definindo os tokens como cookies
-    res.cookie('accessToken', accessToken, { httpOnly: true, secure: true });
-    res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: true });
-    res.status(200).send('Login bem-sucedido!');
+    //res.cookie('accessToken', accessToken, { httpOnly: true, secure: true });
+    //res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: true });
+    
+    // Retornando os tokens no corpo da resposta
+    res.status(200).json({
+      accessToken,
+      refreshToken,
+      message: 'Login bem-sucedido!',
+    });
   } catch (error) {
     res.status(400).send(error.message);
   }

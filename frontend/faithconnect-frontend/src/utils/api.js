@@ -1,7 +1,6 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode'; // Corrigindo a importação para jwtDecode
 import auth from './auth';
+import { jwtDecode } from 'jwt-decode'; // Corrigindo a importação para jwtDecode
 
 const api = axios.create({
   baseURL: 'http://localhost:5000/api', // Ajuste a URL base conforme necessário
@@ -14,7 +13,7 @@ api.interceptors.request.use(async (config) => {
     return config;
   }
 
-  let token = Cookies.get('accessToken');
+  let token = sessionStorage.getItem('accessToken');
   if (token) {
     try {
       // Verificar a expiração do token
