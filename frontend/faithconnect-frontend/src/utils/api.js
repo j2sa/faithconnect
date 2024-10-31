@@ -9,13 +9,17 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(async (config) => {
+  // Adicionando uma exceção para a rota de login
+  if (config.url === '/login') {
+    return config;
+  }
+
   let token = Cookies.get('accessToken');
   if (token) {
     try {
       // Verificar a expiração do token
       const tokenExp = jwtDecode(token).exp;
       const now = Date.now() / 1000;
-
       if (tokenExp < now) {
         // Token expirou, redirecionar para login
         auth.clearToken();
@@ -23,7 +27,6 @@ api.interceptors.request.use(async (config) => {
         window.location.href = '/login'; // Redirecionar para o login se o token estiver expirado
         return Promise.reject(new Error('Token expirado'));
       }
-
       config.headers.Authorization = `Bearer ${token}`;
     } catch (error) {
       // Lidar com erro de token malformado

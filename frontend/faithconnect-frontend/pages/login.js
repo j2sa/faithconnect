@@ -4,7 +4,6 @@ import api from '../src/utils/api';
 import auth from '../src/utils/auth';
 import Image from 'next/image';
 import '../src/styles/globals.css';
-import Cookies from 'js-cookie';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -16,10 +15,14 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await api.post('/login', { email, senha });
-      Cookies.set('accessToken', response.data.accessToken, { expires: 1 }); // Expira em 1 dia
-      Cookies.set('refreshToken', response.data.refreshToken, { expires: 7 }); // Expira em 7 dias
+
+      // Armazenar o token no sessionStorage
+      sessionStorage.setItem('accessToken', response.data.accessToken);
+      sessionStorage.setItem('refreshToken', response.data.refreshToken);
+
       auth.setToken(response.data.accessToken);
       auth.setRefreshToken(response.data.refreshToken);
+
       setError('');
       console.log('Login successful');
       console.log('Redirecionando para /home'); // Adicionando console log para verificar redirecionamento
@@ -68,7 +71,8 @@ const Login = () => {
         <Image
           src="https://i.giphy.com/YOZ2qMCwb9qec0Pkpj.webp"
           alt="Imagem ou Propaganda"
-          width={500} height={500}
+          width={500}
+          height={500}
           unoptimized
         />
       </div>
