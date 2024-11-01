@@ -10,7 +10,7 @@ const Sidebar = () => (
         <Link href="/home" className="text-gray-300 hover:text-white">Início</Link>
       </li>
       <li>
-        <Link href="/membros" className="text-gray-300 hover:text-white">Membros</Link>
+        <Link href="/members" className="text-gray-300 hover:text-white">Membros</Link>
       </li>
     </ul>
   </div>

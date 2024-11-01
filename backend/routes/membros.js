@@ -24,8 +24,8 @@ router.post('/', auth, async (req, res) => {  // Adicionar auth para proteger a 
 router.get('/', auth, async (req, res) => {  // Adicionar auth para proteger a rota
   try {
     const membros = await Membro.find({ igrejaId: req.user.igrejaId }); // Filtrar por igrejaId
-    console.log('Membros encontrados:', membros);
-    const membrosComDatas = membros.map(membro => {
+    //console.log('Membros encontrados:', membros);
+    /*const membrosComDatas = membros.map(membro => {
       console.log('Processando membro:', membro);
       return {
         id: membro._id,
@@ -38,8 +38,8 @@ router.get('/', auth, async (req, res) => {  // Adicionar auth para proteger a r
         status: membro.status,
         motivo_inatividade: membro.status === 'inativo' ? membro.motivo_inatividade : null
       };
-    });
-    res.status(200).send(membrosComDatas);
+    }); */
+    res.status(200).send(membros);
   } catch (error) {
     console.error('Erro ao buscar membros:', error);
     res.status(500).send(error);
@@ -131,6 +131,7 @@ router.get('/relatorios/proximos-aniversarios', auth, async (req, res) => {  // 
       const aniversario = new Date(membro.data_nascimento);
       const idade = hoje.getFullYear() - aniversario.getFullYear();
       return {
+        id: membro._id,
         nome: membro.nome,
         data_nascimento: membro.data_nascimento,
         idade: idade
