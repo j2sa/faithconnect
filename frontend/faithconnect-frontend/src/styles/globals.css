@@ -110,3 +110,11 @@ main {
 .sidebar {
   background-color: #0a5694;
 }
+
+.quadroTotalMembros {
+  width: 250px;
+}
+
+.quadroAniversario {
+  height: 150px;
+}
