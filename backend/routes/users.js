@@ -42,7 +42,7 @@ router.post('/login', async (req, res) => {
     if (!isPasswordValid) {
       return res.status(400).send('Senha incorreta');
     }
-    const accessToken = jwt.sign({ userId: user._id, igrejaId: user.igrejaId._id }, process.env.JWT_SECRET, { expiresIn: '15m' });
+    const accessToken = jwt.sign({ userId: user._id, igrejaId: user.igrejaId._id }, process.env.JWT_SECRET, { expiresIn: '2h' });
     const refreshToken = jwt.sign({ userId: user._id }, process.env.JWT_REFRESH_SECRET, { expiresIn: '7d' });
     
     // Definindo os tokens como cookies
