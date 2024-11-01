@@ -1,9 +1,9 @@
 import Sidebar from './Sidebar';
 
 const LayoutAuth = ({ children }) => (
-  <div className="flex">
-    <Sidebar />
-    <main className="flex-1 p-8">
+  <div className="flex h-screen">
+      <Sidebar />
+    <main className="flex-1 overflow-y-auto p-8">
       {children}
     </main>
   </div>
