@@ -4,17 +4,23 @@ const Membro = require('../models/Membro');
 const auth = require('../middleware/auth'); // Adicione a linha do middleware
 
 // Criar um novo membro
-router.post('/', auth, async (req, res) => {  // Adicionar auth para proteger a rota
+router.post('/', auth, async (req, res) => {
   try {
-    const newMembro = new Membro({
-      ...req.body,
-      userId: req.user.userId, // Associar o userId ao membro
-      igrejaId: req.user.igrejaId, // Associar o igrejaId ao membro
-      conjuge: req.user.conjuge, // Associar o conjuge ao membro
-      filhos: req.user.filhos // Associar os filhos ao membro
-    });
-    await newMembro.save();
-    res.status(201).send(newMembro);
+    const membros = req.body; // Assumir que req.body é um array de membros
+
+    const newMembros = await Promise.all(membros.map(async membro => {
+      const newMembro = new Membro({
+        ...membro,
+        userId: req.user.userId, // Associar o userId ao membro
+        igrejaId: req.user.igrejaId, // Associar o igrejaId ao membro
+        conjuge: req.user.conjuge, // Associar o conjuge ao membro
+        filhos: req.user.filhos // Associar os filhos ao membro
+      });
+      await newMembro.save();
+      return newMembro;
+    }));
+
+    res.status(201).send(newMembros);
   } catch (error) {
     res.status(400).send(error);
   }
@@ -24,21 +30,6 @@ router.post('/', auth, async (req, res) => {  // Adicionar auth para proteger a 
 router.get('/', auth, async (req, res) => {  // Adicionar auth para proteger a rota
   try {
     const membros = await Membro.find({ igrejaId: req.user.igrejaId }); // Filtrar por igrejaId
-    //console.log('Membros encontrados:', membros);
-    /*const membrosComDatas = membros.map(membro => {
-      console.log('Processando membro:', membro);
-      return {
-        id: membro._id,
-        nome: membro.nome,
-        endereco: membro.endereco,
-        data_nascimento: membro.getAniversario(),
-        contato: membro.contato,
-        data_entrada: membro.data_entrada,
-        tempo_de_membresia: membro.getTempoDeMembresia(),
-        status: membro.status,
-        motivo_inatividade: membro.status === 'inativo' ? membro.motivo_inatividade : null
-      };
-    }); */
     res.status(200).send(membros);
   } catch (error) {
     console.error('Erro ao buscar membros:', error);

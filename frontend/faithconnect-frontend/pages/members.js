@@ -70,6 +70,7 @@ const Membros = () => {
               {membros.map((membro) => (
                 <div key={membro.id} className="flex items-center justify-between p-2 border-b">
                   <div>{membro.nome}</div>
+                  <div>{membro.contato}</div>
                   <div className="flex gap-2">
                     <button
                       className="p-2 bg-blue-500 text-white rounded"

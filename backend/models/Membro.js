@@ -2,10 +2,15 @@ const mongoose = require('mongoose');
 
 const MembroSchema = new mongoose.Schema({
   nome: { type: String, required: true },
-  endereco: { type: String, required: true },
   data_nascimento: { type: Date, required: true },
-  contato: { type: String, required: true },
-  data_entrada: { type: Date, required: true },
+  endereco: { type: String, required: true },
+  numero: { type: String, required: true },
+  complemento: { type: String },
+  cidade: { type: String },
+  estado: { type: String },  
+  email: { type: String },
+  telefone: { type: String, required: true },
+  data_entrada: { type: Date },
   status: { 
     type: String, 
     enum: ['ativo', 'inativo'], 
@@ -13,7 +18,7 @@ const MembroSchema = new mongoose.Schema({
   },
   motivo_inatividade: { 
     type: String, 
-    enum: ['falecimento', 'outra_igreja', 'outro'], 
+    enum: ['falecimento', 'transferencia', 'outro'], 
     required: function() { return this.status === 'inativo'; } 
   },
   userId: { 
