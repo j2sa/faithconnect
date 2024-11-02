@@ -78,6 +78,8 @@ const Membros = () => {
     }
   
     return false;
+  }).sort((a, b) => {
+    return a.nome.localeCompare(b.nome);
   });
 
   return (
