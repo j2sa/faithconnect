@@ -20,7 +20,16 @@ const Membros = () => {
 
       // Fetch the data for aniversariantes
       const resultAniversariantes = await api.get('/membros/relatorios/proximos-aniversarios');
-      setAniversariantes(resultAniversariantes.data);
+      // Sort the aniversariantes by date and name
+      const sortedAniversariantes = resultAniversariantes.data.sort((a, b) => {
+        const dateA = new Date(a.data_nascimento);
+        const dateB = new Date(b.data_nascimento);
+        if (dateA.getTime() === dateB.getTime()) {
+          return a.nome.localeCompare(b.nome);
+        }
+        return dateA.getTime() - dateB.getTime();
+      });
+      setAniversariantes(sortedAniversariantes);
 
       // Fetch the data for total membros
       const resultTotalMembros = await api.get('/membros/relatorios/total-membros');
@@ -47,7 +56,7 @@ const Membros = () => {
   const filteredMembros = membros.filter(membro => {
     const isActive = membro.status === 'ativo';
     const isInactive = membro.status === 'inativo';
-
+  
     if (filterOption === 'Todos') {
       return (
         membro.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -67,7 +76,7 @@ const Membros = () => {
         membro.email.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-
+  
     return false;
   });
 
