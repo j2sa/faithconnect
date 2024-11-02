@@ -101,24 +101,49 @@ router.get('/relatorios/motivos-inatividade', auth, async (req, res) => {  // Ad
 });
 
 // Relatório - Próximos Aniversários
-router.get('/relatorios/proximos-aniversarios', auth, async (req, res) => {  // Adicionar auth para proteger a rota
+router.get('/relatorios/proximos-aniversarios', auth, async (req, res) => {
   try {
     const hoje = new Date();
-    const seteDiasDepois = new Date(hoje);
-    seteDiasDepois.setDate(hoje.getDate() + 7);
+    hoje.setHours(0, 0, 0, 0); // Set to start of the day
+
+    const diasDepois = new Date(hoje);
+    diasDepois.setDate(hoje.getDate() + 7);
+    diasDepois.setHours(23, 59, 59, 999); // Set to end of the day
 
     const proximosAniversarios = await Membro.find({
       status: 'ativo',
-      igrejaId: req.user.igrejaId // Filtrar por igrejaId
-    }).select('nome data_nascimento');
+      igrejaId: req.user.igrejaId,
+      $expr: {
+        $and: [
+          {
+            $gte: [
+              {
+                $dateFromParts: {
+                  month: { $month: "$data_nascimento" },
+                  day: { $dayOfMonth: "$data_nascimento" },
+                  year: hoje.getFullYear()
+                }
+              },
+              { $dateFromParts: { year: hoje.getFullYear(), month: 11, day: 2 } }
+            ]
+          },
+          {
+            $lte: [
+              {
+                $dateFromParts: {
+                  month: { $month: "$data_nascimento" },
+                  day: { $dayOfMonth: "$data_nascimento" },
+                  year: hoje.getFullYear()
+                }
+              },
+              { $dateFromParts: { year: hoje.getFullYear(), month: 11, day: 9 } }
+            ]
+          }
+        ]
+      }
+    }).select('nome data_nascimento _id');
 
-    const aniversariantesComIdade = proximosAniversarios.filter(membro => {
-      const aniversario = new Date(membro.data_nascimento);
-      aniversario.setFullYear(hoje.getFullYear()); // Considerar apenas mês e dia
-
-      const dif = (aniversario - hoje) / (1000 * 60 * 60 * 24); // Diferença em dias
-      return dif >= 0 && dif <= 7; // Filtrar aniversariantes nos próximos 7 dias
-    }).map(membro => {
+    const aniversariantesComIdade = proximosAniversarios.map(membro => {
       const aniversario = new Date(membro.data_nascimento);
       const idade = hoje.getFullYear() - aniversario.getFullYear();
       return {

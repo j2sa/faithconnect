@@ -8,6 +8,8 @@ const Membros = () => {
   const [membros, setMembros] = useState([]);
   const [aniversariantes, setAniversariantes] = useState([]);
   const [totalMembros, setTotalMembros] = useState({totalAtivos: 0, totalInativos: 0});
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterOption, setFilterOption] = useState('Todos');
 
   // Define a function to fetch the data
   const fetchData = async () => {
@@ -33,7 +35,42 @@ const Membros = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  console.log(aniversariantes)
+  
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+  };
+
+  const handleFilter = (option) => {
+    setFilterOption(option);
+  };
+
+  const filteredMembros = membros.filter(membro => {
+    const isActive = membro.status === 'ativo';
+    const isInactive = membro.status === 'inativo';
+
+    if (filterOption === 'Todos') {
+      return (
+        membro.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        membro.telefone.includes(searchTerm) ||
+        membro.email.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    } else if (filterOption === 'Ativos') {
+      return isActive && (
+        membro.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        membro.telefone.includes(searchTerm) ||
+        membro.email.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    } else if (filterOption === 'Inativos') {
+      return isInactive && (
+        membro.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        membro.telefone.includes(searchTerm) ||
+        membro.email.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    return false;
+  });
+
   return (
     <div className="mx-auto p-4">
       <div>
@@ -43,29 +80,43 @@ const Membros = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 flex justify-between">
             <div className="p-4 bg-white rounded shadow flex flex-col justify-start flex-1">
               <h2 className="text-xl font-semibold mb-4">Aniversariantes da Semana</h2>
-              <ul className="quadroAniversario grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto">
+              <ul className="quadroAniversario grid grid-cols-1 md:grid-cols-2 gap-2 overflow-y-auto">
                 {aniversariantes.map((membro) => (
-                  <li key={membro.id}>
-                    {membro.nome} - {new Date(new Date(membro.data_nascimento).setDate(new Date(membro.data_nascimento).getDate() + 1)).toLocaleDateString('pt-BR', {day: '2-digit', month: 'numeric'})}
+                  <li key={membro.id} className="flex items-center">
+                    <span className="flex-1">{membro.nome}</span>
+                    <span className="flex-1">
+                      {new Date(new Date(membro.data_nascimento).setDate(new Date(membro.data_nascimento).getDate() + 1)).toLocaleDateString('pt-BR', {day: '2-digit', month: 'numeric'})}
+                    </span>
                   </li>
                 ))}
               </ul>
             </div>
             <div className="quadroTotalMembros p-4 bg-white rounded shadow flex flex-col items-center justify-end">
               <h2 className="text-xl font-semibold mb-4">Total de Membros</h2>
-              <p className="text-9xl font-semibold p-3">{totalMembros.totalAtivos}</p>
+              <p className="text-9xl font-semibold p-3 flex-1 overflow-hidden text-overflow-ellipsis">{totalMembros.totalAtivos}</p>
             </div>
           </div>
 
           {/* Lista de Membros */}
           <div className="quadroListaMembros p-4 bg-white rounded shadow">
             <h2 className="text-xl font-semibold mb-4">Lista de Membros</h2>
-            <input
-              type="text"
-              placeholder="Pesquisar membros..."
-              className="mb-4 p-2 border border-gray-300 rounded"
-              // lógica de pesquisa
-            />
+            <div className="flex items-center mb-4">
+              <input
+                type="text"
+                placeholder="Pesquisar membros..."
+                className="p-2 border border-gray-300 rounded"
+                onChange={(event) => handleSearch(event.target.value)}
+              />
+              <select
+                className="ml-4 p-2 border border-gray-300 rounded"
+                value={filterOption}
+                onChange={(event) => handleFilter(event.target.value)}
+              >
+                <option value="Todos">Todos</option>
+                <option value="Ativos">Ativos</option>
+                <option value="Inativos">Inativos</option>
+              </select>
+            </div>
             <div className="overflow-y-auto h-80">
               <table className="w-full border-collapse">
                 <thead>
@@ -77,7 +128,7 @@ const Membros = () => {
                   </tr>
                 </thead>
                 <tbody className="overflow-y-auto">
-                  {membros.map((membro) => (
+                  {filteredMembros.map((membro) => (
                     <tr key={membro.id} className="hover:bg-gray-100">
                       <td className="px-4 py-2">{membro.nome}</td>
                       <td className="px-4 py-2">{membro.telefone}</td>
