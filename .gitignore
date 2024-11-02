@@ -5,3 +5,46 @@ estrutura.txt
 .vscode/
 trash/
 README.md
+frontend/faithconnect-frontend/.env
+frontend/faithconnect-frontend/.gitignore
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+frontend/faithconnect-frontend/node_modules
+frontend/faithconnect-frontend/.pnp
+frontend/faithconnect-frontend/.pnp.*
+frontend/faithconnect-frontend/.yarn/*
+frontend/faithconnect-frontend/!.yarn/patches
+frontend/faithconnect-frontend/!.yarn/plugins
+frontend/faithconnect-frontend/!.yarn/releases
+frontend/faithconnect-frontend/!.yarn/versions
+
+# testing
+frontend/faithconnect-frontend/coverage
+
+# next.js
+frontend/faithconnect-frontend/.next/
+frontend/faithconnect-frontend/out/
+
+# production
+frontend/faithconnect-frontend/build
+
+# misc
+frontend/faithconnect-frontend/.DS_Store
+frontend/faithconnect-frontend/*.pem
+
+# debug
+frontend/faithconnect-frontend/npm-debug.log*
+frontend/faithconnect-frontend/yarn-debug.log*
+frontend/faithconnect-frontend/yarn-error.log*
+
+# env files (can opt-in for commiting if needed)
+frontend/faithconnect-frontend/.env*
+
+# vercel
+frontend/faithconnect-frontend/.vercel
+
+# typescript
+frontend/faithconnect-frontend/*.tsbuildinfo
+frontend/faithconnect-frontend/next-env.d.ts

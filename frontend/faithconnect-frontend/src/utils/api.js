@@ -1,6 +1,6 @@
 import axios from 'axios';
 import auth from './auth';
-import { jwtDecode } from 'jwt-decode'; // Corrigindo a importação para jwtDecode
+import { jwtDecode } from 'jwt-decode';
 
 const api = axios.create({
   baseURL: 'http://localhost:5000/api', // Ajuste a URL base conforme necessário

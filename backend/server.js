@@ -11,7 +11,7 @@ const auth = require('./middleware/auth');
 dotenv.config({ path: '../.env' });
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.BACKEND_PORT;
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use(bodyParser.json());
 
 const corsOptions = {
-  origin: 'http://localhost:3000', // Permitir a origem específica do frontend
+  origin: "http://" + process.env.DOMAIN_NAME + ":3000", // Permitir a origem específica do frontend
   credentials: true, // Permitir envio de cookies
 };
 app.use(cors(corsOptions)); // Usar CORS com as opções configuradas
