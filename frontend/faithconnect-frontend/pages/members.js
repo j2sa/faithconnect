@@ -147,6 +147,15 @@ const Membros = () => {
                 <option value="Ativos">Ativos</option>
                 <option value="Inativos">Inativos</option>
               </select>
+              <div className="flex-1"></div>
+              <div>
+                <button
+                  className="p-2 bg-blue-500 text-white rounded"
+                  onClick={handleOpenModal}
+                >
+                  Cadastrar Membro
+                </button>
+              </div>
             </div>
             <div className="overflow-y-auto h-80">
               <table className="w-full border-collapse">
@@ -183,12 +192,6 @@ const Membros = () => {
                 </tbody>
               </table>
             </div>
-            <button
-              className="mt-4 p-2 bg-green-500 text-white rounded"
-              onClick={handleOpenModal}
-            >
-              Cadastrar Novo Membro
-            </button>
           </div>
         </div>
       </div>

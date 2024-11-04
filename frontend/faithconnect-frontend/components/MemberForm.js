@@ -165,7 +165,7 @@ const MemberForm = ({ onClose }) => {
               placeholder="CEP"
               min="0"
               max="99999999"
-              style={{ width: '27%' }}
+              style={{ width: '27.5%' }}
             />
           </div>
 
@@ -175,7 +175,7 @@ const MemberForm = ({ onClose }) => {
               id="endereco"
               className="p-2 border border-gray-300 rounded m-2"
               value={endereco}
-              onChange={(event) => setEndereco(event.target.value)}
+              disabled
               placeholder="Endereço"
               style={{ width: '80%' }} // Adjust the width here
             />
@@ -205,7 +205,7 @@ const MemberForm = ({ onClose }) => {
               id="bairro"
               className="p-2 border border-gray-300 rounded w-full m-2"
               value={bairro}
-              onChange={(event) => setBairro(event.target.value)}
+              disabled
               placeholder="Bairro"
             />
           </div>
@@ -216,7 +216,7 @@ const MemberForm = ({ onClose }) => {
               id="cidade"
               className="p-2 border border-gray-300 rounded w-full m-2"
               value={cidade}
-              onChange={(event) => setCidade(event.target.value)}
+              disabled
               placeholder="Cidade"
             />
             <input
@@ -224,7 +224,7 @@ const MemberForm = ({ onClose }) => {
               id="estado"
               className="p-2 border border-gray-300 rounded m-2"
               value={estado}
-              onChange={(event) => setEstado(event.target.value)}
+              disabled
               placeholder="Estado"
               style={{ width: '30%' }} // Adjust the width here
             />
