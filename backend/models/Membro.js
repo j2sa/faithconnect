@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const MembroSchema = new mongoose.Schema({
   nome: { type: String, required: true },
   data_nascimento: { type: Date, required: true },
+  sexo: { 
+    type: String,
+    enum: ['masculino', 'feminino'] 
+  },
   cep: { type: String, required: true },
   endereco: { type: String},
   numero: { type: String},
