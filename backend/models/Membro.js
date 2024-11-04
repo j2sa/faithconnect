@@ -10,7 +10,7 @@ const MembroSchema = new mongoose.Schema({
   estado: { type: String },  
   email: { type: String },
   telefone: { type: String, required: true },
-  data_entrada: { type: Date },
+  data_batismo: { type: Date },
   status: { 
     type: String, 
     enum: ['ativo', 'inativo'], 
@@ -47,9 +47,9 @@ MembroSchema.methods.getAniversario = function() {
 };
 
 MembroSchema.methods.getTempoDeMembresia = function() {
-  const dataEntrada = new Date(this.data_entrada);
+  const dataBatismo = new Date(this.data_batismo);
   const hoje = new Date();
-  const anosDeMembresia = hoje.getFullYear() - dataEntrada.getFullYear();
+  const anosDeMembresia = hoje.getFullYear() - dataBatismo.getFullYear();
   return anosDeMembresia;
 };
 

@@ -2,14 +2,16 @@ import { useState, useEffect } from 'react';
 import api from '../src/utils/api';
 import LayoutAuth from '../components/LayoutAuth';
 import '../src/styles/globals.css';
+import MemberForm from '../components/MemberForm';
 
 const Membros = () => {
   // Define the useState hooks to store the data
   const [membros, setMembros] = useState([]);
   const [aniversariantes, setAniversariantes] = useState([]);
-  const [totalMembros, setTotalMembros] = useState({totalAtivos: 0, totalInativos: 0});
+  const [totalMembros, setTotalMembros] = useState({ totalAtivos: 0, totalInativos: 0 });
   const [searchTerm, setSearchTerm] = useState('');
   const [filterOption, setFilterOption] = useState('Todos');
+  const [showModal, setShowModal] = useState(false);
 
   // Define a function to fetch the data
   const fetchData = async () => {
@@ -44,7 +46,7 @@ const Membros = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  
+
   const handleSearch = (term) => {
     setSearchTerm(term);
   };
@@ -56,7 +58,7 @@ const Membros = () => {
   const filteredMembros = membros.filter(membro => {
     const isActive = membro.status === 'ativo';
     const isInactive = membro.status === 'inativo';
-  
+
     if (filterOption === 'Todos') {
       return (
         membro.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -76,11 +78,15 @@ const Membros = () => {
         membro.email.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-  
+
     return false;
   }).sort((a, b) => {
     return a.nome.localeCompare(b.nome);
   });
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
 
   return (
     <div className="mx-auto p-4">
@@ -96,7 +102,7 @@ const Membros = () => {
                   <li key={membro.id} className="flex items-center">
                     <span className="flex-1">{membro.nome}</span>
                     <span className="flex-1">
-                      {new Date(new Date(membro.data_nascimento).setDate(new Date(membro.data_nascimento).getDate() + 1)).toLocaleDateString('pt-BR', {day: '2-digit', month: 'numeric'})}
+                      {new Date(new Date(membro.data_nascimento).setDate(new Date(membro.data_nascimento).getDate() + 1)).toLocaleDateString('pt-BR', { day: '2-digit', month: 'numeric' })}
                     </span>
                   </li>
                 ))}
@@ -165,13 +171,14 @@ const Membros = () => {
             </div>
             <button
               className="mt-4 p-2 bg-green-500 text-white rounded"
-              onClick={() => {/* lógica para cadastrar novo membro */}}
+              onClick={handleOpenModal}
             >
               Cadastrar Novo Membro
             </button>
           </div>
         </div>
       </div>
+      {showModal && <MemberForm onClose={() => setShowModal(false)} />}
     </div>
   );
 };
