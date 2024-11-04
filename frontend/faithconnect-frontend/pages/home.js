@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import auth from '../src/utils/auth';
 import LayoutAuth from '../components/LayoutAuth';
-import { jwtDecode } from 'jwt-decode';
 
 const Home = () => {
   const router = useRouter();
