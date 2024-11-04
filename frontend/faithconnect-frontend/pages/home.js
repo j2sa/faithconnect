@@ -20,12 +20,16 @@ const Home = () => {
         const now = Date.now() / 1000;
         if (decodedToken.exp < now) {
           // Token expirou
+          auth.clearToken();
+          auth.clearRefreshToken();
           router.push('/login');
         } else {
           setLoading(false);
         }
       } catch (error) {
         console.error('Token inválido:', error);
+        auth.clearToken();
+        auth.clearRefreshToken();
         router.push('/login');
       }
     }

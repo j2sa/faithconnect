@@ -187,4 +187,4 @@ Membros.getLayout = function getLayout(page) {
   return <LayoutAuth>{page}</LayoutAuth>;
 };
 
-export default Membros;
+export default Membros; 

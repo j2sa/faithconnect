@@ -15,18 +15,13 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await api.post('/login', { email, senha });
-
-      // Armazenar o token no sessionStorage
-      sessionStorage.setItem('accessToken', response.data.accessToken);
-      sessionStorage.setItem('refreshToken', response.data.refreshToken);
-
+      // Store the token in sessionStorage
       auth.setToken(response.data.accessToken);
       auth.setRefreshToken(response.data.refreshToken);
-
       setError('');
       console.log('Login successful');
-      console.log('Redirecionando para /home'); // Adicionando console log para verificar redirecionamento
-      router.push('/home'); // Redirecionar para home após login bem-sucedido
+      console.log('Redirecting to /home'); // Adding console log to verify redirection
+      router.push('/home'); // Redirect to home after successful login
     } catch (error) {
       setError('Login failed. Please try again.');
       console.error('Login failed:', error.message);

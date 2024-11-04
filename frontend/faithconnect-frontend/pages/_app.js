@@ -14,7 +14,7 @@ const MyApp = ({ Component, pageProps }) => {
     setIsAuthenticated(!!token);
   }, [router]);
 
-  const publicRoutes = ['/', '/login', '/register'];
+  const publicRoutes = ['/', '/login'];
   
   const getLayout = (page) => {
     if (publicRoutes.includes(router.pathname)) {

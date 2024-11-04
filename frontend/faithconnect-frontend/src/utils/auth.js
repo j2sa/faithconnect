@@ -1,23 +1,21 @@
-import Cookies from 'js-cookie';
-
 const auth = {
   setToken: (token) => {
-    Cookies.set('accessToken', token, { expires: 1 }); // Expira em 1 dia
+    sessionStorage.setItem('accessToken', token);
   },
   getToken: () => {
-    return Cookies.get('accessToken');
+    return sessionStorage.getItem('accessToken');
   },
   clearToken: () => {
-    Cookies.remove('accessToken');
+    sessionStorage.removeItem('accessToken');
   },
   setRefreshToken: (token) => {
-    Cookies.set('refreshToken', token, { expires: 7 }); // Expira em 7 dias
+    sessionStorage.setItem('refreshToken', token);
   },
   getRefreshToken: () => {
-    return Cookies.get('refreshToken');
+    return sessionStorage.getItem('refreshToken');
   },
   clearRefreshToken: () => {
-    Cookies.remove('refreshToken');
+    sessionStorage.removeItem('refreshToken');
   },
 };
 
