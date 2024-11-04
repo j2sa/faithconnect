@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../src/utils/api';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -6,20 +6,50 @@ import 'react-datepicker/dist/react-datepicker.css';
 const MemberForm = ({ onClose }) => {
   const [nome, setNome] = useState('');
   const [dataNascimento, setDataNascimento] = useState(null);
+  const [sexo, setSexo] = useState('');
+  const [cep, setCep] = useState('');
   const [endereco, setEndereco] = useState('');
   const [numero, setNumero] = useState('');
   const [complemento, setComplemento] = useState('');
+  const [bairro, setBairro] = useState('');
   const [cidade, setCidade] = useState('');
   const [estado, setEstado] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
   const [dataBatismo, setDataBatismo] = useState(null);
 
+  useEffect(() => {
+    if (cep) {
+      fetchAddressData(cep);
+    }
+  }, [cep]);
+
+  const fetchAddressData = async (cep) => {
+    try {
+      if (cep.length === 8) {
+        const response = await api.get(`/cep/${cep}`);
+        const data = response.data;
+        setEndereco(data.logradouro);
+        setBairro(data.bairro);
+        setCidade(data.localidade);
+        setEstado(data.uf);
+      } else if (cep.length < 8) {//+
+        // Clear the form fields if the CEP length is less than 8
+        setEndereco('');
+        setBairro('');
+        setCidade('');
+        setEstado('');
+      }
+    } catch (error) {
+      console.error('Error fetching address data:', error);
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
   
-    if (!nome || !telefone || !dataNascimento) {
-      alert('O Nome, Telefone e Data Nascimento são campos obrigatórios.');
+    if (!nome || !telefone || !dataNascimento || !cep) {
+      alert('O Nome, Telefone, Data Nascimento e CEP são campos obrigatórios.');
       return;
     }
   
@@ -28,14 +58,17 @@ const MemberForm = ({ onClose }) => {
       const payload = [
         {
           nome: nome.trim() !== '' ? nome : undefined,
+          telefone: telefone.trim() !== '' ? telefone : undefined,
+          email: email.trim() !== '' ? email : undefined,
           data_nascimento: dataNascimento ? dataNascimento.toISOString() : undefined,
+          sexo: sexo.trim() !== ''? sexo : undefined,
+          cep: cep.trim() !== ''? cep : undefined,
           endereco: endereco.trim() !== '' ? endereco : undefined,
           numero: numero.trim() !== '' ? numero : undefined,
           complemento: complemento.trim() !== '' ? complemento : undefined,
+          bairro: bairro.trim() !== ''? bairro : undefined,
           cidade: cidade.trim() !== '' ? cidade : undefined,
           estado: estado.trim() !== '' ? estado : undefined,
-          email: email.trim() !== '' ? email : undefined,
-          telefone: telefone.trim() !== '' ? telefone : undefined,
           data_batismo: dataBatismo ? dataBatismo.toISOString() : undefined,
         }
       ].filter(Boolean);
@@ -70,6 +103,16 @@ const MemberForm = ({ onClose }) => {
 
           <div className="flex">
             <input
+              type="text"
+              id="telefone"
+              className="p-2 border border-gray-300 rounded m-2"
+              value={telefone}
+              onChange={(event) => setTelefone(event.target.value)}
+              placeholder="Telefone"
+              style={{ width: '40%' }}
+            />
+
+            <input
               type="email"
               id="email"
               className="p-2 border border-gray-300 rounded w-full m-2"
@@ -79,18 +122,7 @@ const MemberForm = ({ onClose }) => {
             />
           </div>
 
-          <div className="flex">
-            <input
-              type="text"
-              id="telefone"
-              className="p-2 border border-gray-300 rounded w-full m-2"
-              value={telefone}
-              onChange={(event) => setTelefone(event.target.value)}
-              placeholder="Telefone"
-            />
-          </div>
-
-          <div className="flex">
+          <div className="flex justify-between">
             <DatePicker
               selected={dataNascimento}
               onChange={setDataNascimento}
@@ -100,6 +132,40 @@ const MemberForm = ({ onClose }) => {
               showMonthDropdown
               showYearDropdown
               dropdownMode="select"
+            />
+            <div 
+              className="p-2 border border-gray-300 rounded m-2" 
+              style={{ width: '40%' }}
+            >
+              <select
+                id="sexo"
+                value={sexo}
+                onChange={(event) => setSexo(event.target.value)}
+                className='w-full'
+              >
+                <option value="" disabled>Sexo</option>
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="flex">
+            <input
+              type="number"
+              id="cep"
+              className="p-2 border border-gray-300 rounded m-2"
+              value={cep.toString()}
+              onChange={(event) => {
+                const cepValue = event.target.value.replace(/\D/g, '');
+                if (cepValue.length <= 8) {
+                  setCep(cepValue);
+                }
+              }}
+              placeholder="CEP"
+              min="0"
+              max="99999999"
+              style={{ width: '27%' }}
             />
           </div>
 
@@ -132,16 +198,26 @@ const MemberForm = ({ onClose }) => {
               value={complemento}
               onChange={(event) => setComplemento(event.target.value)}
               placeholder="Complemento"
-              style={{ width: '30%' }} // Adjust the width here
+              style={{ width: '45%' }} // Adjust the width here
             />
             <input
               type="text"
+              id="bairro"
+              className="p-2 border border-gray-300 rounded w-full m-2"
+              value={bairro}
+              onChange={(event) => setBairro(event.target.value)}
+              placeholder="Bairro"
+            />
+          </div>
+
+          <div className="flex">
+          <input
+              type="text"
               id="cidade"
-              className="p-2 border border-gray-300 rounded m-2"
+              className="p-2 border border-gray-300 rounded w-full m-2"
               value={cidade}
               onChange={(event) => setCidade(event.target.value)}
               placeholder="Cidade"
-              style={{ width: '45%' }} // Adjust the width here
             />
             <input
               type="text"
@@ -150,7 +226,7 @@ const MemberForm = ({ onClose }) => {
               value={estado}
               onChange={(event) => setEstado(event.target.value)}
               placeholder="Estado"
-              style={{ width: '20%' }} // Adjust the width here
+              style={{ width: '30%' }} // Adjust the width here
             />
           </div>
 

@@ -11,6 +11,7 @@ const MembroSchema = new mongoose.Schema({
   endereco: { type: String},
   numero: { type: String},
   complemento: { type: String },
+  bairro: { type: String },
   cidade: { type: String },
   estado: { type: String },  
   email: { type: String },
