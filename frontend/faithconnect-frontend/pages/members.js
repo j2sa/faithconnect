@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import auth from '../src/utils/auth';
 import api from '../src/utils/api';
 import LayoutAuth from '../components/LayoutAuth';
 import '../src/styles/globals.css';
 import MemberForm from '../components/MemberForm';
 
 const Membros = () => {
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
   // Define the useState hooks to store the data
   const [membros, setMembros] = useState([]);
   const [aniversariantes, setAniversariantes] = useState([]);
@@ -44,8 +48,17 @@ const Membros = () => {
 
   // Use the useEffect hook to fetch the data only once when the component mounts
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (!auth.validateToken()) {
+      router.push('/login');
+    } else {
+      setLoading(false);
+      fetchData();
+    }
+  }, [router]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   const handleSearch = (term) => {
     setSearchTerm(term);
