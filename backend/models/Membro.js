@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 const MembroSchema = new mongoose.Schema({
   nome: { type: String, required: true },
   data_nascimento: { type: Date, required: true },
-  endereco: { type: String, required: true },
-  numero: { type: String, required: true },
+  cep: { type: String, required: true },
+  endereco: { type: String},
+  numero: { type: String},
   complemento: { type: String },
   cidade: { type: String },
   estado: { type: String },  
