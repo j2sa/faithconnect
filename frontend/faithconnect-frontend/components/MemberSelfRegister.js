@@ -68,31 +68,43 @@ const MemberForm = ({ onClose }) => {
   
     try {
       // Create the payload object
-      const payload = [
-        {
-          nome: nome.trim() !== '' ? nome : undefined,
-          telefone: telefone.trim() !== '' ? telefone : undefined,
-          email: email.trim() !== '' ? email : undefined,
-          data_nascimento: dataNascimento ? dataNascimento.toISOString() : undefined,
-          sexo: sexo.trim() !== ''? sexo : undefined,
-          cep: cep.trim() !== ''? cep : undefined,
-          endereco: endereco.trim() !== '' ? endereco : undefined,
-          numero: numero.trim() !== '' ? numero : undefined,
-          complemento: complemento.trim() !== '' ? complemento : undefined,
-          bairro: bairro.trim() !== ''? bairro : undefined,
-          cidade: cidade.trim() !== '' ? cidade : undefined,
-          estado: estado.trim() !== '' ? estado : undefined,
-          data_batismo: dataBatismo ? dataBatismo.toISOString() : undefined,
-          igrejaId: churchId !== '' ? churchId : undefined,
+      const payload = {
+          nome: nome.trim() !== '' ? nome : "",
+          telefone: telefone.trim() !== '' ? telefone : "",
+          email: email.trim() !== '' ? email : "",
+          data_nascimento: dataNascimento ? dataNascimento.toISOString() : "",
+          sexo: sexo.trim() !== ''? sexo : "",
+          cep: cep.trim() !== ''? cep : "",
+          endereco: endereco.trim() !== '' ? endereco : "",
+          numero: numero.trim() !== '' ? numero : "",
+          complemento: complemento.trim() !== '' ? complemento : "",
+          bairro: bairro.trim() !== ''? bairro : "",
+          cidade: cidade.trim() !== '' ? cidade : "",
+          estado: estado.trim() !== '' ? estado : "",
+          data_batismo: dataBatismo ? dataBatismo.toISOString() : "",
+          churchId: churchId !== '' ? churchId : "",
         }
-      ].filter(Boolean);
   
       // Send the registration data to the API
-      await api.post('/membros', payload);
+      await api.post('/membro', payload);
   
-  
-      // Close the modal and perform any necessary actions
-      onClose();
+      alert("Cadastro realizado com sucesso")
+      
+      // clear all fields
+      setNome('');
+      setDataNascimento(null);
+      setSexo('');
+      setCep('');
+      setInvalidCep(false);
+      setEndereco('');
+      setNumero('');
+      setComplemento('');
+      setBairro('');
+      setCidade('');
+      setEstado('');
+      setEmail('');
+      setTelefone('');
+      setDataBatismo(null);
     } catch (error) {
       console.error('Erro ao cadastrar membro:', error);
     }
