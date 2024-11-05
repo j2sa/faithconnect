@@ -6,5 +6,7 @@
       "use": "@vercel/static-build"
     }
   ],
-  "start": "npm run start"
+  "build": {
+    "ignoreProcess": true
+  }
 }
