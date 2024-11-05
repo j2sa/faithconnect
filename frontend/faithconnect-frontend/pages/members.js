@@ -102,7 +102,7 @@ const Membros = () => {
   };
 
   const handleOpenChurchRegistration = (churchId) => {
-    router.push(`/churchMemberRegistration?churchId=${churchId}`);
+    router.push(`/churchmemberregistration?churchId=${churchId}`);
   };
 
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import MemberSelfRegister from '../components/MemberSelfRegister';
 
-const ChurchMemberRegistration = () => {
+const churchmemberregistration = () => {
   return (
     <div>
       <MemberSelfRegister/>
@@ -9,4 +9,4 @@ const ChurchMemberRegistration = () => {
   );
 };
 
-export default ChurchMemberRegistration;
+export default churchmemberregistration;
