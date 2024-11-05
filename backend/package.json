@@ -11,7 +11,7 @@
     "mongoose": "^8.7.3"
   },
     "scripts": {
-    "build": "echo 'Build concluído'",
+    "build": "node server.js",
     "start": "node server.js"
   }
 }
