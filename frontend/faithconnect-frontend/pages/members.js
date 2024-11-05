@@ -16,7 +16,7 @@ const Membros = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterOption, setFilterOption] = useState('Todos');
   const [showModal, setShowModal] = useState(false);
-  const [churchId] = useState(auth.getChurchId());
+  const [churchId, setChurchId] = useState('');
   // Define a function to fetch the data
   const fetchData = async () => {
     try {
@@ -40,6 +40,8 @@ const Membros = () => {
       // Fetch the data for total membros
       const resultTotalMembros = await api.get('/membros/relatorios/total-membros');
       setTotalMembros(resultTotalMembros.data);
+
+      setChurchId(auth.getChurchId());
 
     } catch (error) {
       console.error('Erro ao buscar dados:', error);
