@@ -6,6 +6,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser'); 
 const membrosRouter = require('./routes/membros');
 const usersRouter = require('./routes/users');
+const publicRoutes = require('./routes/publicRoutes');
 const auth = require('./middleware/auth');
 const axios = require('axios');
 
@@ -26,6 +27,9 @@ const corsOptions = {
 };
 app.use(cors(corsOptions)); // Usar CORS com as opções configuradas
 app.use(cookieParser()); // Usar cookie-parser
+app.use('/api/membros', membrosRouter);
+app.use('/api', usersRouter);
+app.use('/api', publicRoutes);
 
 app.use('/api', (req, res, next) => {
   if (req.path === '/register' || req.path === '/login') {
@@ -38,6 +42,7 @@ app.get('/', (req, res) => {
   res.send('ChurchHub API');
 });
 
+/*
 // Add a new route for fetching CEP data
 app.get('/api/cep/:cep', async (req, res) => {
   const { cep } = req.params;
@@ -58,10 +63,7 @@ app.get('/api/cep/:cep', async (req, res) => {
     res.status(error.status).json({ code: error.code });
   }
 });
-
-app.use('/api/membros', membrosRouter);
-app.use('/api', usersRouter);
-
+*/
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
