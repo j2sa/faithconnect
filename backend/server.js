@@ -13,7 +13,6 @@ const axios = require('axios');
 dotenv.config({ path: '.env' });
 
 const app = express();
-const PORT = process.env.BACKEND_PORT;
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
