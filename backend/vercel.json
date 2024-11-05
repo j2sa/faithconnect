@@ -6,7 +6,5 @@
       "use": "@vercel/static-build"
     }
   ],
-  "build": {
-    "command": "npm run build && npm run start &"
-  }
+  "start": "npm run start"
 }
