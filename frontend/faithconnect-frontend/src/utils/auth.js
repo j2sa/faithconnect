@@ -45,6 +45,12 @@ const auth = {
       return false;
     }
   },
+  setChurchId: (churchId) => {
+    sessionStorage.setItem('churchId', churchId);
+  },
+  getChurchId: () => {
+    return sessionStorage.getItem('churchId');
+  },
 };
 
 export default auth;

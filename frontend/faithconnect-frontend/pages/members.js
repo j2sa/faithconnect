@@ -16,7 +16,7 @@ const Membros = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterOption, setFilterOption] = useState('Todos');
   const [showModal, setShowModal] = useState(false);
-
+  const [churchId] = useState(auth.getChurchId());
   // Define a function to fetch the data
   const fetchData = async () => {
     try {
@@ -101,6 +101,10 @@ const Membros = () => {
     setShowModal(true);
   };
 
+  const handleOpenChurchRegistration = (churchId) => {
+    router.push(`/churchMemberRegistration?churchId=${churchId}`);
+  };
+
   return (
     <div className="mx-auto p-4">
       <div>
@@ -153,6 +157,12 @@ const Membros = () => {
                   onClick={handleOpenModal}
                 >
                   Cadastrar Membro
+                </button>
+                <button
+                  className="ml-2 p-2 bg-blue-500 text-white rounded"
+                  onClick={() => handleOpenChurchRegistration(churchId)} // Replace '123' with the actual church ID
+                >
+                  Pagina de cadastro
                 </button>
               </div>
             </div>

@@ -23,7 +23,7 @@ const MyApp = ({ Component, pageProps }) => {
     if (isAuthenticated) {
       return <LayoutAuth>{page}</LayoutAuth>;
     }
-    return <Layout>{page}</Layout>;
+    return page;
   };
 
   return getLayout(<Component {...pageProps} />);

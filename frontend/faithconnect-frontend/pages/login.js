@@ -18,6 +18,7 @@ const Login = () => {
       // Store the token in sessionStorage
       auth.setToken(response.data.accessToken);
       auth.setRefreshToken(response.data.refreshToken);
+      auth.setChurchId(response.data.churchId);
       setError('');
       console.log('Login successful');
       console.log('Redirecting to /home'); // Adding console log to verify redirection
