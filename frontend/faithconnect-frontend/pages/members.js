@@ -49,7 +49,6 @@ const Membros = () => {
   // Use the useEffect hook to fetch the data only once when the component mounts
   useEffect(() => {
     if (!auth.validateToken()) {
-      alert('Sessão expirada. Faça login novamente.');
       router.push('/login');
     } else {
       setLoading(false);

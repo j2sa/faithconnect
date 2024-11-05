@@ -9,7 +9,6 @@ const Home = () => {
 
   useEffect(() => {
     if (!auth.validateToken()) {
-      alert('Sessão expirada. Faça login novamente.');
       router.push('/login');
     } else {
       setLoading(false);
