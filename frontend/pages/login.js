@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import api from '../src/utils/api';
 import auth from '../src/utils/auth';
 import Image from 'next/image';
-import '../styles/globals.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
