@@ -6,5 +6,10 @@
       "use": "@vercel/static-build"
     }
   ],
-  "outputDirectory": ""
+  "routes": [
+    {
+      "src": "/",
+      "dest": "index.html"
+    }
+  ]
 }
