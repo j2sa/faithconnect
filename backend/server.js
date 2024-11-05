@@ -22,7 +22,7 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use(bodyParser.json());
 
 const corsOptions = {
-  origin: "http://" + process.env.DOMAIN_NAME + ":3000", // Permitir a origem específica do frontend
+  origin: process.env.FRONTEND_URL, // Permitir a origem específica do frontend
   credentials: true, // Permitir envio de cookies
 };
 app.use(cors(corsOptions)); // Usar CORS com as opções configuradas
