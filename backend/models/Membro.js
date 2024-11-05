@@ -27,11 +27,6 @@ const MembroSchema = new mongoose.Schema({
     enum: ['falecimento', 'transferencia', 'outro'], 
     required: function() { return this.status === 'inativo'; } 
   },
-  userId: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User', 
-    required: true 
-  },
   igrejaId: { 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'Church', 

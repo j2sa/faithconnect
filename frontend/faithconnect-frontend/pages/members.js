@@ -109,14 +109,14 @@ const Membros = () => {
         <div>
           {/* Quadros de Aniversariantes e Total de Membros */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 flex justify-between">
-            <div className="p-4 bg-white rounded shadow flex flex-col justify-start flex-1">
-              <h2 className="text-xl font-semibold mb-4">Aniversariantes da Semana</h2>
-              <ul className="quadroAniversario grid grid-cols-1 md:grid-cols-2 gap-2 overflow-y-auto">
+            <div className="quadroAniversariantes p-4 bg-white rounded shadow flex flex-col justify-start flex-1">
+              <h2 className="text-xl font-semibold mb-2">Aniversariantes da Semana</h2>
+              <ul className="grid grid-cols-1 md:grid-cols-2 overflow-y-auto gap-2">
                 {aniversariantes.map((membro) => (
                   <li key={membro.id} className="flex items-center">
                     <span className="flex-1">{membro.nome}</span>
                     <span className="flex-1">
-                      {new Date(new Date(membro.data_nascimento).setDate(new Date(membro.data_nascimento).getDate() + 1)).toLocaleDateString('pt-BR', { day: '2-digit', month: 'numeric' })}
+                      {new Date(membro.data_nascimento).toLocaleDateString('pt-BR', { day: '2-digit', month: 'numeric' })}
                     </span>
                   </li>
                 ))}
@@ -163,8 +163,7 @@ const Membros = () => {
                   <tr>
                     <th className="px-4 py-2 text-left">Nome</th>
                     <th className="px-4 py-2 text-left">Telefone</th>
-                    <th className="px-4 py-2 text-left">Email</th>
-                    <th className="px-4 py-2"></th>
+                    <th className="px-4 py-2 text-left">Bairro</th>
                   </tr>
                 </thead>
                 <tbody className="overflow-y-auto">
@@ -172,21 +171,7 @@ const Membros = () => {
                     <tr key={membro.id} className="hover:bg-gray-100">
                       <td className="px-4 py-2">{membro.nome}</td>
                       <td className="px-4 py-2">{membro.telefone}</td>
-                      <td className="px-4 py-2">{membro.email}</td>
-                      <td className="px-4 py-2 flex gap-2 justify-end">
-                        <button
-                          className="p-2 bg-blue-500 text-white rounded"
-                          onClick={() => {/* lógica para editar membro */}}
-                        >
-                          Editar
-                        </button>
-                        <button
-                          className="p-2 bg-gray-500 text-white rounded"
-                          onDoubleClick={() => {/* lógica para abrir informações do membro */}}
-                        >
-                          ℹ️
-                        </button>
-                      </td>
+                      <td className="px-4 py-2">{membro.bairro}</td>
                     </tr>
                   ))}
                 </tbody>

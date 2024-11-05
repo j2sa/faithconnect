@@ -55,8 +55,7 @@ app.get('/api/cep/:cep', async (req, res) => {
       uf: data.uf,
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to fetch CEP data' });
+    res.status(error.status).json({ code: error.code });
   }
 });
 

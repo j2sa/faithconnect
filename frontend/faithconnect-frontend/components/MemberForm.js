@@ -8,6 +8,7 @@ const MemberForm = ({ onClose }) => {
   const [dataNascimento, setDataNascimento] = useState(null);
   const [sexo, setSexo] = useState('');
   const [cep, setCep] = useState('');
+  const [invalidCep, setInvalidCep] = useState(false);
   const [endereco, setEndereco] = useState('');
   const [numero, setNumero] = useState('');
   const [complemento, setComplemento] = useState('');
@@ -29,11 +30,20 @@ const MemberForm = ({ onClose }) => {
       if (cep.length === 8) {
         const response = await api.get(`/cep/${cep}`);
         const data = response.data;
-        setEndereco(data.logradouro);
-        setBairro(data.bairro);
-        setCidade(data.localidade);
-        setEstado(data.uf);
-      } else if (cep.length < 8) {//+
+        if (data.logradouro === undefined) {
+          setInvalidCep(true);
+          setEndereco('');
+          setBairro('');
+          setCidade('');
+          setEstado('');
+        } else {
+          setInvalidCep(false);
+          setEndereco(data.logradouro);
+          setBairro(data.bairro);
+          setCidade(data.localidade);
+          setEstado(data.uf);
+        }    
+      } else if (cep.length < 8) {
         // Clear the form fields if the CEP length is less than 8
         setEndereco('');
         setBairro('');
@@ -48,7 +58,7 @@ const MemberForm = ({ onClose }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
   
-    if (!nome || !telefone || !dataNascimento || !cep) {
+    if (!nome || !telefone || !dataNascimento || !cep || invalidCep || cep.length < 8) {
       alert('O Nome, Telefone, Data Nascimento e CEP são campos obrigatórios.');
       return;
     }
@@ -97,7 +107,7 @@ const MemberForm = ({ onClose }) => {
               className="p-2 border border-gray-300 rounded w-full m-2"
               value={nome}
               onChange={(event) => setNome(event.target.value)}
-              placeholder="Nome"
+              placeholder="Nome completo"
             />
           </div>
 
@@ -150,23 +160,30 @@ const MemberForm = ({ onClose }) => {
             </div>
           </div>
 
-          <div className="flex">
-            <input
-              type="number"
-              id="cep"
-              className="p-2 border border-gray-300 rounded m-2"
-              value={cep.toString()}
-              onChange={(event) => {
-                const cepValue = event.target.value.replace(/\D/g, '');
-                if (cepValue.length <= 8) {
-                  setCep(cepValue);
-                }
-              }}
-              placeholder="CEP"
-              min="0"
-              max="99999999"
-              style={{ width: '27.5%' }}
+          <div className="flex" style={{ alignItems: 'center' }}>
+            <input 
+              type="number" 
+              id="cep" 
+              className={`p-2 border border-gray-300 rounded m-2 ${invalidCep ? 'border-red-500' : ''}`} 
+              value={cep.toString()} 
+              onChange={(event) => { 
+                const cepValue = event.target.value.replace(/\D/g, ''); 
+                if (cepValue.length <= 8) { 
+                  setCep(cepValue); 
+                } 
+              }} 
+              placeholder="CEP" 
+              min="0" 
+              max="99999999" 
+              style={{ width: '27.5%' }} 
+              aria-invalid={invalidCep} 
+              aria-describedby={invalidCep ? "cep-error" : null}
             />
+            {invalidCep && (
+              <div id="cep-error" className="text-red-500 text-sm">
+                Insira um CEP válido.
+              </div>
+            )}
           </div>
 
           <div className="flex">
@@ -255,7 +272,7 @@ const MemberForm = ({ onClose }) => {
             </button>
             <button
               type="submit"
-              className="p-2 bg-green-500 text-white rounded"
+              className="p-2 bg-blue-500 text-white rounded"
             >
               Cadastrar
             </button>
