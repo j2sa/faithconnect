@@ -102,7 +102,8 @@ const Membros = () => {
   };
 
   const handleOpenChurchRegistration = (churchId) => {
-    router.push(`/churchmemberregistration?churchId=${churchId}`);
+    const url = `/churchmemberregistration?churchId=${churchId}`;
+    window.open(url, '_blank');
   };
 
   return (
@@ -160,8 +161,8 @@ const Membros = () => {
                 </button>
                 <button
                   className="ml-2 p-2 bg-blue-500 text-white rounded"
-                  onClick={() => handleOpenChurchRegistration(churchId)} // Replace '123' with the actual church ID
-                >
+                  onClick={() => handleOpenChurchRegistration(churchId)}
+                  >
                   Pagina de cadastro
                 </button>
               </div>
