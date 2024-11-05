@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import LayoutAuth from '../components/LayoutAuth';
 import auth from '../src/utils/auth';
-import '../src/styles/globals.css';
+import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }) => {
   const router = useRouter();

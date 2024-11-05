@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import auth from '../src/utils/auth';
 import api from '../src/utils/api';
 import LayoutAuth from '../components/LayoutAuth';
-import '../src/styles/globals.css';
+import '../styles/globals.css';
 import MemberForm from '../components/MemberForm';
 
 const Membros = () => {
