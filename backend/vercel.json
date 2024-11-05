@@ -7,6 +7,6 @@
     }
   ],
   "build": {
-    "ignoreProcess": true
+    "command": "npm run build && npm run start &"
   }
 }
