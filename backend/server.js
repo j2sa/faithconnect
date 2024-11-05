@@ -18,6 +18,11 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error(err));
 
+  const port = process.env.BACKEND_PORT || 5000;
+  app.listen(port, () => {
+    console.log(`Servidor rodando na porta ${port}`);
+  });
+
 app.use(bodyParser.json());
 
 const corsOptions = {
