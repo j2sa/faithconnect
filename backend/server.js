@@ -10,7 +10,7 @@ const publicRoutes = require('./routes/publicRoutes');
 const auth = require('./middleware/auth');
 const axios = require('axios');
 
-dotenv.config({ path: '../backend/.env' });
+dotenv.config({ path: '../.env' });
 
 const app = express();
 
@@ -19,14 +19,13 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
-console.log(require('fs').readFileSync('faithconnect/backend/.env', 'utf8'));
-console.log('process.env: ' + process.env);
+
 const MONGODB_URI = process.env.MONGODB_URI;
 console.log('mongo: ' + MONGODB_URI); // verificar se a variável está definida
 
 mongoose.connect(MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log('Erro MongoDB Connect:' + err));
+  .catch(err => console.error('Erro MongoDB Connect:' + err));
 
   app.listen(() => {
     console.log('Servidor rodando');
