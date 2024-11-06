@@ -19,9 +19,10 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
-
+console.log(require('fs').readFileSync('faithconnect/backend/.env', 'utf8'));
+console.log('process.env: ' + process.env);
 const MONGODB_URI = process.env.MONGODB_URI;
-console.log(MONGODB_URI); // verificar se a variável está definida
+console.log('mongo: ' + MONGODB_URI); // verificar se a variável está definida
 
 mongoose.connect(MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
