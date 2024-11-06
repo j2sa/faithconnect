@@ -21,7 +21,6 @@ app.listen(port, () => {
 });
 
 const MONGODB_URI = process.env.MONGODB_URI;
-console.log('mongo: ' + MONGODB_URI); // verificar se a variável está definida
 
 mongoose.connect(MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
