@@ -34,30 +34,31 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { email, senha } = req.body;
+
+    if (!email || !senha) {
+      return res.status(400).json({ error: 'Email e senha são obrigatórios' });
+    }
+
     const user = await User.findOne({ email }).populate('igrejaId');
+
     if (!user) {
-      return res.status(400).send('Usuário não encontrado');
+      return res.status(400).json({ error: 'Usuário não encontrado' });
     }
+
     const isPasswordValid = await bcrypt.compare(senha, user.senha);
+
     if (!isPasswordValid) {
-      return res.status(400).send('Senha incorreta');
+      return res.status(400).json({ error: 'Senha incorreta' });
     }
+
     const accessToken = jwt.sign({ userId: user._id, igrejaId: user.igrejaId._id }, process.env.JWT_SECRET, { expiresIn: '2h' });
     const refreshToken = jwt.sign({ userId: user._id }, process.env.JWT_REFRESH_SECRET, { expiresIn: '7d' });
-    const churchId = user.igrejaId._id
-    // Definindo os tokens como cookies
-    //res.cookie('accessToken', accessToken, { httpOnly: true, secure: true });
-    //res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: true });
 
-    // Retornando os tokens no corpo da resposta
-    res.status(200).json({
-      accessToken,
-      refreshToken,
-      churchId,
-      message: 'Login bem-sucedido!',
-    });
+    const churchId = user.igrejaId._id;
+
+    res.status(200).json({ accessToken, refreshToken, churchId, message: 'Login bem-sucedido!' });
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(400).json({ error: error.message, statusCode: 400 });
   }
 });
 
