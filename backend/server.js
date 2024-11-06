@@ -20,10 +20,7 @@ app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
 
-const MONGODB_URI = process.env.MONGODB_URI;
-console.log(MONGODB_URI); // verificar se a variável está definida
-
-mongoose.connect(MONGODB_URI)
+mongoose.connect("mongodb+srv://joelmartinez:BbOvzv05zYk1t7Xa@cluster0.6aaz2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log('Erro MongoDB Connect:' + err));
 
