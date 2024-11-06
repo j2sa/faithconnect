@@ -36,6 +36,7 @@ router.post('/login', async (req, res) => {
     const { email, senha } = req.body;
 
     if (!email || !senha) {
+      console.log('Email e senha são obrigatórios')
       return res.status(400).json({ error: 'Email e senha são obrigatórios' });
     }
 
