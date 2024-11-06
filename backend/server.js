@@ -10,7 +10,7 @@ const publicRoutes = require('./routes/publicRoutes');
 const auth = require('./middleware/auth');
 const axios = require('axios');
 
-dotenv.config({ path: '.env' });
+dotenv.config({ path: '../backend/.env' });
 
 const app = express();
 
