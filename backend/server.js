@@ -10,18 +10,26 @@ const publicRoutes = require('./routes/publicRoutes');
 const auth = require('./middleware/auth');
 const axios = require('axios');
 
-dotenv.config({ path: '.env' });
+const envConfig = {};
+
+const envFile = require('fs').readFileSync('faithconnect/backend/.env', 'utf8');
+const envVars = envFile.split('\n');
+
+envVars.forEach((line) => {
+  const [key, value] = line.split('=');
+  envConfig[key.trim()] = value.trim();
+});
 
 const app = express();
 
-const port = process.env.PORT || 5000;
+const port = envConfig.PORT || 5000;
 
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
 console.log(require('fs').readFileSync('faithconnect/backend/.env', 'utf8'));
-console.log('process.env: ' + process.env);
-const MONGODB_URI = process.env.MONGODB_URI;
+console.log('envConfig: ' + envConfig);
+const MONGODB_URI = envConfig.MONGODB_URI;
 console.log('mongo: ' + MONGODB_URI); // verificar se a variável está definida
 
 mongoose.connect(MONGODB_URI)
@@ -35,7 +43,7 @@ mongoose.connect(MONGODB_URI)
 app.use(bodyParser.json());
 
 const corsOptions = {
-  origin: process.env.FRONTEND_URL, // Permitir a origem específica do frontend
+  origin: envConfig.FRONTEND_URL, // Permitir a origem específica do frontend
   credentials: true, // Permitir envio de cookies
 };
 app.use(cors(corsOptions)); // Usar CORS com as opções configuradas
