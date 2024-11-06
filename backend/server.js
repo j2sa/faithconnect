@@ -10,7 +10,7 @@ const publicRoutes = require('./routes/publicRoutes');
 const auth = require('./middleware/auth');
 const axios = require('axios');
 
-dotenv.config({ path: '.env' });
+dotenv.config({ path: './.env' });
 
 const app = express();
 
@@ -20,16 +20,12 @@ app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
 
+const MONGODB_URI = process.env.MONGODB_URI;
+console.log(MONGODB_URI); // verificar se a variável está definida
 
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log('MongoDB connected');
-    console.log('MONGODB_URI:', process.env.MONGODB_URI);
-  })
-  .catch(err => {
-    console.log('Erro ao conectar ao MongoDB:', err);
-    console.log('MONGODB_URI:', process.env.MONGODB_URI);
-  });
+mongoose.connect(MONGODB_URI)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log('Erro MongoDB Connect:' + err));
 
   app.listen(() => {
     console.log('Servidor rodando');
