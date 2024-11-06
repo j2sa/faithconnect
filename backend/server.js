@@ -22,8 +22,14 @@ app.listen(port, () => {
 
 
 mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error(err));
+  .then(() => {
+    console.log('MongoDB connected');
+    console.log('MONGODB_URI:', process.env.MONGODB_URI);
+  })
+  .catch(err => {
+    console.log('Erro ao conectar ao MongoDB:', err);
+    console.log('MONGODB_URI:', process.env.MONGODB_URI);
+  });
 
   app.listen(() => {
     console.log('Servidor rodando');
