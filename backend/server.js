@@ -26,10 +26,6 @@ mongoose.connect(MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('Erro MongoDB Connect:' + err));
 
-  app.listen(() => {
-    console.log('Servidor rodando');
-  });
-
 app.use(bodyParser.json());
 
 const corsOptions = {
