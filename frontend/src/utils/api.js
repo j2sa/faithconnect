@@ -3,7 +3,7 @@ import auth from './auth';
 import { jwtDecode } from 'jwt-decode';
 
 const api = axios.create({
-  baseURL: process.env.BACKEND_URL || 'http://54.144.56.127:5000' + '/api', // Ajuste a URL base conforme necessário
+  baseURL: process.env.REACT_APP_BACKEND_URL + '/api', // Ajuste a URL base conforme necessário OLD = || 'http://54.144.56.127:5000' + '/api'
   withCredentials: true, // Permitir envio de cookies
 });
 
