@@ -3,7 +3,7 @@ import auth from './auth';
 import { jwtDecode } from 'jwt-decode';
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL + '/api', // Ajuste a URL base conforme necessário OLD = || 'http://54.144.56.127:5000' + '/api'
+  baseURL: 'https://api/churchhub.app.br/api', // Ajuste a URL base conforme necessário
   withCredentials: true, // Permitir envio de cookies
 });
 
