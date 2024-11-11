@@ -72,7 +72,7 @@ router.post('/token', (req, res) => {
     if (err) return res.sendStatus(403);
 
     const accessToken = jwt.sign({ userId: user.userId, igrejaId: user.igrejaId }, process.env.JWT_SECRET, { expiresIn: '15m' });
-    res.cookie('accessToken', accessToken, { httpOnly: true, secure: true, maxAge: 15 * 60 * 1000 });
+    res.cookie('accessToken', accessToken, { httpOnly: false, secure: true, maxAge: 15 * 60 * 1000 });
     res.json({ accessToken });
   });
 });
