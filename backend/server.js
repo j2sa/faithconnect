@@ -51,8 +51,8 @@ app.get('/', (req, res) => {
 });
 
 const server = https({
-  key: fs.readFileSync('/etc/letsencrypt/live/api.churchhub.app.br/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/api.churchhub.app.br/fullchain.pem'),
+  key: fs.readFileSync('../etc/letsencrypt/live/api.churchhub.app.br/privkey.pem'),
+  cert: fs.readFileSync('../etc/letsencrypt/live/api.churchhub.app.br/fullchain.pem'),
 }, app);
 
 server.listen(port, () => {
