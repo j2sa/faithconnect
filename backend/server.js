@@ -2,23 +2,21 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
-const cors = require('cors'); 
-const cookieParser = require('cookie-parser'); 
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const membrosRouter = require('./routes/membros');
 const usersRouter = require('./routes/users');
 const publicRoutes = require('./routes/publicRoutes');
 const auth = require('./middleware/auth');
 const axios = require('axios');
+const https = require('https').createServer;
+const fs = require('fs');
 
 dotenv.config({ path: '../.env' });
 
 const app = express();
 
 const port = process.env.PORT || 5000;
-
-app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}`);
-});
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
@@ -29,11 +27,14 @@ mongoose.connect(MONGODB_URI)
 app.use(bodyParser.json());
 
 const corsOptions = {
-  origin: process.env.FRONTEND_URL, // Permitir a origem específica do frontend
-  credentials: true, // Permitir envio de cookies
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
 };
-app.use(cors(corsOptions)); // Usar CORS com as opções configuradas
-app.use(cookieParser()); // Usar cookie-parser
+
+app.use(cors(corsOptions));
+
+app.use(cookieParser());
+
 app.use('/api/membros', membrosRouter);
 app.use('/api', usersRouter);
 app.use('/api', publicRoutes);
@@ -49,4 +50,11 @@ app.get('/', (req, res) => {
   res.send('ChurchHub API');
 });
 
-module.exports = app;
+const server = https({
+  key: fs.readFileSync('/etc/letsencrypt/live/api.churchhub.app.br/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/api.churchhub.app.br/fullchain.pem'),
+}, app);
+
+server.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
+});
